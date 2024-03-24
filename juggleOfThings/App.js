@@ -3,8 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import { SinnTracker } from "./Screens/SinnTracker";
 import { AddButton } from "./components/AddButton";
 import { Table } from "./components/Table";
-
 import { DefaultButton } from "./components/DefaultButton";
+import { InputField } from "./components/InputField";
 
 export default function App() {
   names = ["peter", "gustav", "edgar"];
@@ -35,6 +35,10 @@ export default function App() {
             textSize={45}
           />
         </View>
+
+        <InputField label_name={"Abbrechen"} label_alignment={"none"} />
+        {/* >> possible lable alignments: inside, top, none */}
+
         <DefaultButton
           button_text={"Speichern"}
           btn_width={140}
