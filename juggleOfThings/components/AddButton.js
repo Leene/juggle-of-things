@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 
 export function AddButton(props) {
-  const { button_name, alignment, color, textSize, textColor } = props;
+  const { button_text, alignment, color, textSize, textColor } = props;
 
   let align = "";
   console.log(alignment);
@@ -30,7 +30,7 @@ export function AddButton(props) {
         <Text
           style={[styles.buttonText, { fontSize: textSize, color: textColor }]}
         >
-          {button_name}
+          {button_text}
         </Text>
       </View>
     </>
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
 
   buttonText: {
     fontWeight: "800",
-
     marginTop: 10,
   },
 });
