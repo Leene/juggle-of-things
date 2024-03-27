@@ -5,6 +5,7 @@ import { AddButton } from "./components/AddButton";
 import { Table } from "./components/Table";
 import { DefaultButton } from "./components/DefaultButton";
 import { InputField } from "./components/InputField";
+import { Calendar } from "./components/Calendar";
 
 export default function App() {
   names = ["peter", "gustav", "edgar"];
@@ -38,6 +39,8 @@ export default function App() {
 
         <InputField label_name={"Abbrechen"} label_alignment={"none"} />
         {/* >> possible lable alignments: inside, top, none */}
+
+        <Calendar title={"März"} />
 
         <DefaultButton
           button_text={"Speichern"}

@@ -9,8 +9,10 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "^49.0.23",
+    "dayjs": "^1.11.10",
+    "expo": "^50.0.14",
     "expo-status-bar": "~1.11.1",
+    "lodash": "^4.17.21",
     "react": "18.2.0",
     "react-native": "0.73.6",
     "react-native-calendar-picker": "^6.1.5"
