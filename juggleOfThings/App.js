@@ -40,7 +40,7 @@ export default function App() {
         <InputField label_name={"Abbrechen"} label_alignment={"none"} />
         {/* >> possible lable alignments: inside, top, none */}
 
-        <Calendar title={"März"} />
+        <Calendar title={"April"} />
 
         <DefaultButton
           button_text={"Speichern"}
