@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import dayjs from "dayjs";
-import _ from "lodash";
+import _, { create } from "lodash";
+import { CreateCalendarData } from "./CreateCalendarData/";
 
 const calendarData = [
   {
@@ -10,6 +11,7 @@ const calendarData = [
     month: 3,
     year: 2024,
     marked: "none",
+    fullDate: "2024-03-01",
   },
   {
     dayname: "Sa",
@@ -17,6 +19,7 @@ const calendarData = [
     month: 3,
     year: 2024,
     marked: "red",
+    fullDate: "2024-03-02",
   },
   {
     dayname: "So",
@@ -24,48 +27,55 @@ const calendarData = [
     month: 3,
     year: 2024,
     marked: "pink",
+    fullDate: "2024-03-03",
   },
   {
     dayname: "Fr",
-    day: 1,
+    day: 4,
     month: 3,
     year: 2024,
     marked: "none",
+    fullDate: "2024-03-04",
   },
   {
     dayname: "Sa",
-    day: 2,
+    day: 5,
     month: 3,
     year: 2024,
     marked: "red",
+    fullDate: "2024-03-05",
   },
   {
     dayname: "So",
-    day: 3,
+    day: 6,
     month: 3,
     year: 2024,
     marked: "pink",
+    fullDate: "2024-03-06",
   },
   {
     dayname: "Fr",
-    day: 1,
+    day: 7,
     month: 3,
     year: 2024,
     marked: "none",
+    fullDate: "2024-03-07",
   },
   {
     dayname: "Sa",
-    day: 2,
+    day: 8,
     month: 3,
     year: 2024,
     marked: "red",
+    fullDate: "2024-03-09",
   },
   {
     dayname: "So",
-    day: 3,
+    day: 9,
     month: 3,
     year: 2024,
     marked: "pink",
+    fullDate: "2024-03-09",
   },
 ];
 
@@ -76,7 +86,7 @@ export function Calendar(props) {
     const dayNames = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
     return dayNames.map((index) => (
-      <Text key={index} style={styles.daysText}>
+      <Text key={"rdn" + index} style={styles.daysText}>
         {index}
       </Text>
     ));
@@ -84,7 +94,7 @@ export function Calendar(props) {
 
   function renderDayDates() {
     return calendarData.map((index) => (
-      <Text key={index} style={styles.daysButtonText}>
+      <Text key={"rdd" + index} style={styles.daysButtonText}>
         {index.day}
       </Text>
     ));
@@ -99,15 +109,30 @@ export function Calendar(props) {
 
     return <Text>{daysofMonth}</Text>;
   }
-
+  ////////// hier weiter
+  const selectedMonth = CreateCalendarData("2024", "03");
+  console.log("??");
+  console.log("Moo:" + selectedMonth[0].fullDate);
+  ////////////////
   return (
-    <View style={[styles.container, styles.shadow]}>
-      <View style={styles.days}>{renderDayNames()}</View>
-      <View style={styles.days}>
-        {/* <Text>{renderDaysOfMonth()}</Text> */}
+    <>
+      <View>
+        <Text style={styles.calendar_month}>
+          {dayjs(calendarData.fullDate).format("MMMM")}
+        </Text>
+        <Text style={""}>{selectedMonth[1].fullDate}</Text>
+        <Text style={""}>{selectedMonth.fullDate}</Text>
       </View>
-      <View style={styles.dayList}>{renderDayDates()}</View>
-    </View>
+      <View style={[styles.container, styles.shadow]}>
+        <View style={styles.days}>{renderDayNames()}</View>
+        <View style={styles.days}>
+          {/* <Text>{renderDaysOfMonth()}</Text> */}
+        </View>
+        <View style={styles.dayList}>{renderDayDates()}</View>
+
+        {/* <CreateCalendarData year={"2024"} month={"4"} /> */}
+      </View>
+    </>
   );
 }
 
@@ -127,6 +152,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
     elevation: 7,
+  },
+
+  calendar_month: {
+    fontWeight: "800",
+    fontSize: 20,
+    textAlign: "center",
   },
   days: {
     flexDirection: "row",
