@@ -1,8 +1,7 @@
 import dayjs from "dayjs";
 
 export function CreateCalendarData(year, month) {
-  // befülle so oft wie monat im jahr tage hat collection
-  //ausnahme für februar bei schaltjahren
+  // Befülle immmer zahlen des Vormonats beginnen  ab letzten Montag
   const data = [];
   const lengthOfMonth = dayjs(year + "-" + month + "-01").daysInMonth();
 

@@ -9,7 +9,7 @@ export function SinnTracker() {
   );
 
   const [selectedMonthState, setSelectedMonthState] = useState(
-    dayjs().format("MM")
+    dayjs().format("MM") - 2
   );
 
   console.log("selectedMonthState" + selectedMonthState);

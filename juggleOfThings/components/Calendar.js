@@ -12,8 +12,18 @@ function generateKey(pre) {
 console.log('generateKey("3"): ' + generateKey("2"));
 ///////////////////////////////////////////////////////////
 
-function renderDayNames() {
-  const dayNames = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+function renderDayNames(currentDate) {
+  const dayNames = [
+    dayjs(currentDate).format("dd"),
+    dayjs(currentDate).add(1, "day").format("dd"),
+    dayjs(currentDate).add(2, "day").format("dd"),
+    dayjs(currentDate).add(3, "day").format("dd"),
+    dayjs(currentDate).add(4, "day").format("dd"),
+    dayjs(currentDate).add(5, "day").format("dd"),
+    dayjs(currentDate).add(6, "day").format("dd"),
+  ];
+
+  console.log("renderDayNames:" + dayjs(currentDate).format("dd"));
 
   return dayNames.map((index) => (
     <Text key={"rdn" + index} style={styles.daysText}>
@@ -49,7 +59,12 @@ export function Calendar(props) {
       dayjs(currentDate).format("MM")
     );
 
-    console.log("Gheadline: " + headline);
+    console.log("Gheadlinec: " + headline);
+    console.log(
+      "daysofMonth: " + daysofMonth[0].day,
+      daysofMonth[0].month,
+      daysofMonth[0].year
+    );
 
     return daysofMonth.map((index) => (
       <Text key={"key_" + generateKey(index)} style={styles.daysButtonText}>
@@ -68,7 +83,7 @@ export function Calendar(props) {
         <Text style={""}>{selectedMonth.fullDate}</Text> */}
       </View>
       <View style={[styles.container, styles.shadow]}>
-        <View style={styles.days}>{renderDayNames()}</View>
+        <View style={styles.days}>{renderDayNames(currentDate)}</View>
         <View style={styles.days}>
           {/* <Text>{renderDaysOfMonth()}</Text> */}
         </View>
