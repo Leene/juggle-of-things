@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 import dayjs from "dayjs";
-import _, { create } from "lodash";
+import _, { create, toInteger } from "lodash";
 import { CreateCalendarData } from "./CreateCalendarData/";
 
 ////Key generator////////////////////////////////////////////////////
@@ -46,12 +46,13 @@ export function Calendar(props) {
     selectedYearState + "-" + selectedMonthState + "-01"
   );
   const headline = dayjs(currentDate).format("MMMM") + " " + selectedYearState;
-  // TODO normale Variable genug
-  //////////////
-  //const [selectedYearState, setSelectedYearState] = useState("");
-  //const [selectedMonthState, setSelectedMonthState] = useState("");
+  const headline_month = dayjs(currentDate).format("MMMM");
+  const headline_year = dayjs(currentDate).format("YYYY");
 
   //////////////
+
+  console.log("currentDate" + dayjs(currentDate).format("YYYY"));
+  console.log("selectedYearState::" + selectedYearState);
 
   function renderDayDates() {
     const daysofMonth = CreateCalendarData(
@@ -60,11 +61,6 @@ export function Calendar(props) {
     );
 
     console.log("Gheadlinec: " + headline);
-    console.log(
-      "daysofMonth: " + daysofMonth[0].day,
-      daysofMonth[0].month,
-      daysofMonth[0].year
-    );
 
     return daysofMonth.map((index) => (
       <Text key={"key_" + generateKey(index)} style={styles.daysButtonText}>
@@ -74,13 +70,42 @@ export function Calendar(props) {
   }
 
   ///////////////
-
+  console.log("setSelectedYearState" + selectedYearState);
   return (
     <>
-      <View>
-        <Text style={styles.calendar_month}>{headline}</Text>
-        {/* <Text style={""}>{selectedMonth[10].fullDate}</Text>
-        <Text style={""}>{selectedMonth.fullDate}</Text> */}
+      <View style={styles.calendar_headline}>
+        <Button
+          style={styles.calendar_headline_button}
+          title="<"
+          onPress={() => {
+            setSelectedMonthState(selectedMonthState - 1);
+          }}
+        ></Button>
+        <Text style={styles.calendar_month}>{headline_month}</Text>
+        <Button
+          style={styles.calendar_headline_button}
+          title=">"
+          onPress={() => {
+            setSelectedMonthState(selectedMonthState + 1);
+          }}
+        ></Button>
+        <Button
+          style={styles.calendar_headline_button}
+          title="<"
+          onPress={() => {
+            setSelectedYearState(selectedYearState - 1); //ToDo
+          }}
+        ></Button>
+        <Text style={styles.calendar_month}>{headline_year}</Text>
+        <Button
+          style={styles.calendar_headline_button}
+          title=">"
+          onPress={() => {
+            setSelectedYearState(selectedYearState + 1); //ToDo
+          }}
+        ></Button>
+
+        {/* <Text style={styles.calendar_month}>{headline}</Text> */}
       </View>
       <View style={[styles.container, styles.shadow]}>
         <View style={styles.days}>{renderDayNames(currentDate)}</View>
@@ -113,10 +138,18 @@ const styles = StyleSheet.create({
     elevation: 7,
   },
 
+  calendar_headline: {
+    flexDirection: "row",
+    marginHorizontal: 10,
+    justifyContent: "space-evenly",
+  },
+  calendar_headline_button: {},
   calendar_month: {
     fontWeight: "800",
     fontSize: 20,
     textAlign: "center",
+    marginHorizontal: 20,
+    width: 100,
   },
   days: {
     flexDirection: "row",

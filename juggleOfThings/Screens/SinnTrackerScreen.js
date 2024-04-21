@@ -9,7 +9,7 @@ export function SinnTracker() {
   );
 
   const [selectedMonthState, setSelectedMonthState] = useState(
-    dayjs().format("MM") - 2
+    dayjs().format("MM")
   );
 
   console.log("selectedMonthState" + selectedMonthState);
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
   add_template: {
     width: "100%",
-    flex: 2,
+    flex: 3,
     backgroundColor: "brown",
   },
   report_sin: {
