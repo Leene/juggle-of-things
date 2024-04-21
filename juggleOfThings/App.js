@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import { SinnTracker } from "./Screens/SinnTracker";
+import { SinnTracker } from "./Screens/SinnTrackerScreen";
 import { AddButton } from "./components/AddButton";
 import { Table } from "./components/Table";
 import { DefaultButton } from "./components/DefaultButton";
@@ -13,7 +13,8 @@ export default function App() {
   return (
     <>
       <View style={styles.container}>
-        <Table table_name={"Tabelle 1"} />
+        <SinnTracker />
+
         <Table table_name={"Tabelle 2"} />
         <View
           style={{
@@ -39,8 +40,6 @@ export default function App() {
 
         <InputField label_name={"Abbrechen"} label_alignment={"none"} />
         {/* >> possible lable alignments: inside, top, none */}
-
-        <Calendar title={"April"} />
 
         <DefaultButton
           button_text={"Speichern"}

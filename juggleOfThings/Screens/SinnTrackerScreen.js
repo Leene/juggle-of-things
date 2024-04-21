@@ -1,6 +1,18 @@
 import { StyleSheet, Text, View } from "react-native";
+import { Calendar } from "../components/Calendar";
+import dayjs from "dayjs";
+import React, { useState } from "react";
 
 export function SinnTracker() {
+  const [selectedYearState, setSelectedYearState] = useState(
+    dayjs().format("YYYY")
+  );
+
+  const [selectedMonthState, setSelectedMonthState] = useState(
+    dayjs().format("MM")
+  );
+
+  console.log("selectedMonthState" + selectedMonthState);
   return (
     <View style={styles.container}>
       <View style={styles.headline}>
@@ -8,6 +20,12 @@ export function SinnTracker() {
       </View>
       <View style={styles.add_template}>
         <Text>Anlegen</Text>
+        <Calendar
+          selectedYearState={selectedYearState}
+          setSelectedYearState={setSelectedYearState}
+          selectedMonthState={selectedMonthState}
+          setSelectedMonthState={setSelectedMonthState}
+        />
       </View>
       <View style={styles.report_sin}>
         <Text>Report</Text>
@@ -39,7 +57,7 @@ const styles = StyleSheet.create({
   },
   add_template: {
     width: "100%",
-    flex: 1,
+    flex: 2,
     backgroundColor: "brown",
   },
   report_sin: {

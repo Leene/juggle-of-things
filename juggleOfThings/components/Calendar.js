@@ -1,39 +1,69 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import dayjs from "dayjs";
 import _, { create } from "lodash";
 import { CreateCalendarData } from "./CreateCalendarData/";
 
+////Key generator////////////////////////////////////////////////////
+function generateKey(pre) {
+  return `${pre}_${new Date().getTime()}`;
+}
+
+console.log('generateKey("3"): ' + generateKey("2"));
+///////////////////////////////////////////////////////////
+
+function renderDayNames() {
+  const dayNames = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+
+  return dayNames.map((index) => (
+    <Text key={"rdn" + index} style={styles.daysText}>
+      {index}
+    </Text>
+  ));
+}
+
 export function Calendar(props) {
-  const { title } = props;
+  const {
+    selectedMonth,
+    selectedYear,
+    selectedYearState,
+    setSelectedYearState,
+    selectedMonthState,
+    setSelectedMonthState,
+  } = props;
 
-  function renderDayNames() {
-    const dayNames = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+  const currentDate = dayjs(
+    selectedYearState + "-" + selectedMonthState + "-01"
+  );
+  const headline = dayjs(currentDate).format("MMMM") + " " + selectedYearState;
+  // TODO normale Variable genug
+  //////////////
+  //const [selectedYearState, setSelectedYearState] = useState("");
+  //const [selectedMonthState, setSelectedMonthState] = useState("");
 
-    return dayNames.map((index) => (
-      <Text key={"rdn" + index} style={styles.daysText}>
-        {index}
-      </Text>
-    ));
-  }
-  let headline;
-  function renderDayDates(selectedYear, selectedMonth) {
-    headline = selectedYear + "-" + "05" + "-04";
-    //headline = selectedYear + "-" + selectedMonth + "-01";
-    const daysofMonth = CreateCalendarData(selectedYear, selectedMonth);
+  //////////////
+
+  function renderDayDates() {
+    const daysofMonth = CreateCalendarData(
+      dayjs(currentDate).format("YYYY"),
+      dayjs(currentDate).format("MM")
+    );
+
+    console.log("Gheadline: " + headline);
+
     return daysofMonth.map((index) => (
-      <Text key={"rdd" + index} style={styles.daysButtonText}>
+      <Text key={"key_" + generateKey(index)} style={styles.daysButtonText}>
         {index.day}
       </Text>
     ));
   }
 
+  ///////////////
+
   return (
     <>
       <View>
-        <Text style={styles.calendar_month}>
-          {dayjs(headline).format("MMMM")}zzz
-        </Text>
+        <Text style={styles.calendar_month}>{headline}</Text>
         {/* <Text style={""}>{selectedMonth[10].fullDate}</Text>
         <Text style={""}>{selectedMonth.fullDate}</Text> */}
       </View>
@@ -42,7 +72,7 @@ export function Calendar(props) {
         <View style={styles.days}>
           {/* <Text>{renderDaysOfMonth()}</Text> */}
         </View>
-        <View style={styles.dayList}>{renderDayDates("2023", "04")}</View>
+        <View style={styles.dayList}>{renderDayDates()}</View>
 
         {/* <CreateCalendarData year={"2024"} month={"4"} /> */}
       </View>
@@ -104,5 +134,6 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     width: 372,
     backgroundColor: "hotpink",
+    borderWidth: 5,
   },
 });

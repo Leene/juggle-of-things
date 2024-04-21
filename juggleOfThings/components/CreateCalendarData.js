@@ -10,6 +10,7 @@ export function CreateCalendarData(year, month) {
     data.push({
       day: i + 1,
       month: month,
+
       year: year,
       fullDate: dayjs(year + "-" + month + "-" + i).format("DD.MM.YYYY"),
     });
