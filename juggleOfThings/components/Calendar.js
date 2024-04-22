@@ -6,7 +6,7 @@ import { CreateCalendarData } from "./CreateCalendarData/";
 
 ////Key generator////////////////////////////////////////////////////
 function generateKey(pre) {
-  return `${pre}_${new Date().getTime()}`;
+  return `${pre}_${new Date().getTime() + _.random(5, true)}`;
 }
 
 console.log('generateKey("3"): ' + generateKey("2"));
@@ -45,6 +45,8 @@ export function Calendar(props) {
   const currentDate = dayjs(
     selectedYearState + "-" + selectedMonthState + "-01"
   );
+  console.log("currentDateDDD" + dayjs(currentDate).format("YYYY-MM-DD"));
+
   const headline = dayjs(currentDate).format("MMMM") + " " + selectedYearState;
   const headline_month = dayjs(currentDate).format("MMMM");
   const headline_year = dayjs(currentDate).format("YYYY");
@@ -66,6 +68,7 @@ export function Calendar(props) {
       <Text key={"key_" + generateKey(index)} style={styles.daysButtonText}>
         {index.day}
       </Text>
+      //,console.log("key:" + "key_" + generateKey(index))
     ));
   }
 
@@ -78,7 +81,9 @@ export function Calendar(props) {
           style={styles.calendar_headline_button}
           title="<"
           onPress={() => {
-            setSelectedMonthState(selectedMonthState - 1);
+            setSelectedMonthState(
+              dayjs(currentDate).subtract(1, "month").format("MM")
+            );
           }}
         ></Button>
         <Text style={styles.calendar_month}>{headline_month}</Text>
@@ -86,14 +91,20 @@ export function Calendar(props) {
           style={styles.calendar_headline_button}
           title=">"
           onPress={() => {
-            setSelectedMonthState(selectedMonthState + 1);
+            //setSelectedMonthState(selectedMonthState + 1);
+
+            setSelectedMonthState(
+              dayjs(currentDate).add(1, "month").format("MM")
+            );
           }}
         ></Button>
         <Button
           style={styles.calendar_headline_button}
           title="<"
           onPress={() => {
-            setSelectedYearState(selectedYearState - 1); //ToDo
+            setSelectedYearState(
+              dayjs(currentDate).subtract(1, "year").format("YYYY")
+            ); //ToDo
           }}
         ></Button>
         <Text style={styles.calendar_month}>{headline_year}</Text>
@@ -102,6 +113,9 @@ export function Calendar(props) {
           title=">"
           onPress={() => {
             setSelectedYearState(selectedYearState + 1); //ToDo
+            setSelectedYearState(
+              dayjs(currentDate).add(1, "year").format("YYYY")
+            ); //ToDo
           }}
         ></Button>
 
