@@ -6,6 +6,10 @@ import { Table } from "./components/Table";
 import { DefaultButton } from "./components/DefaultButton";
 import { InputField } from "./components/InputField";
 import { Calendar } from "./components/Calendar";
+import { NavigationContainer } from "@react-navigation/native";
+//import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+//const Stack = createNativeStackNavigator(); // erstellt HistoryStack damit vor zurück wie im Browser funzt
 
 export default function App() {
   names = ["peter", "gustav", "edgar"];
